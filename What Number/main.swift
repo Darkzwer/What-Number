@@ -7,17 +7,22 @@
 
 import Foundation
 
-let randomNumber = UInt8(arc4random_uniform(50))
-print ("Компьютер загадает число вам необходимо угадать его.")
-var myNumber: String?
+let message = [
+    "start":"Введите вариант числа и нажмите Enter",
+    "more":"Ваше число больше загаданного",
+    "less":"Ваше число меньше загаданного",
+    "win":"Вы угадали!"]
+let randomNumber = String(arc4random_uniform(50))
+var userNumber: String = ""
 repeat {
-    print ("Введите ваш вариант и нажмите Enter")
-    myNumber = readLine()
-    if (UInt8(myNumber!) == randomNumber){
-        print("Вы угадали")
-    } else if (UInt8(myNumber!)! > randomNumber){
-        print("Ваше число больше")
-    } else if (UInt8(myNumber!)! < randomNumber){
-        print("Ваше число меньше")
+    print(message["start"]!)
+    let myNumber = readLine()
+    userNumber = myNumber ?? ""
+    if userNumber < randomNumber{
+        print(message["less"]!)
+    }else if userNumber > randomNumber{
+        print(message["more"]!)
     }
-} while randomNumber != UInt8(myNumber!)
+} while userNumber != randomNumber
+
+print(message["win"]!)
